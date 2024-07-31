@@ -1,10 +1,44 @@
+import { useEffect, useState } from "react"
+import { useLoaderData } from "react-router-dom"
 
 export default function Play() {
+    const {posts} = useLoaderData()
+    const [isDesktop, setIsDesktop] = useState(true)
+    const [isPlaying, setIsPlaying] = useState(false)
+    const [difficulty, setDifficulty] = useState('none')
+    const randomPost = Math.floor(Math.random() * posts.length)
+
+    console.log(posts[randomPost].body)
+
+
+    useEffect(() => {
+        if (window.innerWidth <= 800) {
+            return setIsDesktop(false)
+        }
+        return setIsDesktop(true)
+    }, [isDesktop])
+
+
     return (
         <div>
-            <h1>Select a difficulty</h1>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim ullam maxime nobis laboriosam rerum cumque reiciendis eius perspiciatis magni perferendis debitis labore saepe ducimus, architecto dignissimos explicabo nulla non expedita?
-            </p>
+            {difficulty === 'none' && <select defaultValue={difficulty} onChange={(e) => setDifficulty(e.target.value)} name="user-difficulty" id="user-difficulty">
+                <option disabled value="none">Select a Difficulty</option>
+                <option value="easy">Easy</option>
+                <option value="medium">Meduim</option>
+                <option value="hard">Hard</option>
+            </select>}
+
+            {difficulty != 'none' && !isPlaying && <button onClick={() => setIsPlaying(true)} className="play-btn">Play</button>}
+            <p>{posts[randomPost].body}</p>
         </div>
     )
 }
+
+async function getData(){
+    const res = await fetch('https://dummyjson.com/posts')
+    const data = await res.json()
+    return data
+
+}
+
+export {getData}
