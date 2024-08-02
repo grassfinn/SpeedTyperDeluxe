@@ -2,10 +2,22 @@ import { useState } from 'react';
 import Sentence from './Sentence';
 import AnswerChoiceContainer from './AnswerChoiceContainer';
 
-function PlayContainer({post}) {
+function PlayContainer({ post, isDesktop }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [difficulty, setDifficulty] = useState('none');
 
+  const sentence = post.body.split(' ');
+  const words = document.getElementsByClassName('word');
+
+  function checkInput(e) {
+    let correctIndex = e.target.value.split(' ').length - 1;
+    let currentWord = e.target.value.split(' ')[correctIndex];
+    console.log(correctIndex)
+    if (currentWord === sentence[correctIndex]) {
+     return words[correctIndex].classList.add('correct');
+    }
+    return words[correctIndex].classList.remove('correct');
+  }
 
   return (
     <div>
@@ -39,7 +51,16 @@ function PlayContainer({post}) {
         {/* 3 Remove first word from the array and redo step 1 */}
         {/* 4 When the whole string has been completed time stops/ points generated  */}
         {/* Component structure */}
-        {isPlaying && <AnswerChoiceContainer string={post.body} />}
+        {isPlaying && !isDesktop && (
+          <AnswerChoiceContainer string={post.body} />
+        )}
+        {isPlaying && isDesktop && (
+          <textarea
+            onChange={checkInput}
+            style={{ width: 450, minHeight: 100 }}
+            placeholder={post.body}
+          ></textarea>
+        )}
         {/* AnswerChoice */}
       </section>
     </div>

@@ -50,6 +50,10 @@ a:hover {
         background-color: #f9f9f9;
     }
 }
+/* Game Mechanics */
+.correct {
+        color: lawngreen;
+    }
 
 @media (max-width: 800px) {
     nav {
@@ -101,7 +105,5 @@ a:hover {
         min-height: 150px;
     }
 
-    .correct {
-        color: lawngreen;
-    }
+    
 }

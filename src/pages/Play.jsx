@@ -21,7 +21,7 @@ export default function Play() {
   }, [isDesktop]);
 
   return (
-    <PlayContainer post={post} />
+    <PlayContainer post={post} isDesktop={isDesktop} />
   );
 }
 
