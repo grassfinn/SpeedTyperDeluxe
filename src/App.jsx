@@ -3,6 +3,7 @@ import RootLayout from './layouts/RootLayout'
 import Home from './pages/Home'
 import Play, { getData } from './pages/Play'
 import Write from './pages/Write'
+import PlayLayout from './layouts/PlayLayout'
 
 function App() {
 

@@ -87,4 +87,21 @@ a:hover {
         padding: .2em 2em;
     }
 
+    .answer-choices {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+
+    }
+
+    .answer-choice {
+        border: 3px solid black;
+        border-radius: 20px;
+        align-content: center;
+        min-height: 150px;
+    }
+
+    .correct {
+        color: lawngreen;
+    }
 }
